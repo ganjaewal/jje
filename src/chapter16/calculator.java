@@ -10,7 +10,7 @@ public class calculator extends JFrame {
         add(b);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(200, 100);
+        setSize(250, 300);
         setVisible(true);
     }
     public static void main(String[] args) {

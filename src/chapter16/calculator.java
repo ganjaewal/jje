@@ -17,7 +17,7 @@ public class calculator extends JFrame {
         setVisible(true);
     }
     void showNorth() {
-        JPanel panel = new JPanel(new GridLayout(1, 3));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,10,10));
 
         JLabel l1 = new JLabel("통화환율");
 
@@ -27,29 +27,26 @@ public class calculator extends JFrame {
 
     }
     void showCenter() {
-        JPanel p1 = new JPanel(new FlowLayout());
-        JPanel p2 = new JPanel(new FlowLayout());
-        JPanel p3 = new JPanel(new FlowLayout());
-        JPanel panel = new JPanel(new GridLayout(3, 0));
+        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+        JPanel panel = new JPanel(new GridLayout(2, 0));
 
-        JLabel won = new JLabel("원");
-        JTextField t1 = new JTextField("0");
-        JTextField t2 = new JTextField("");
-        JTextField t3 = new JTextField("0");
-        t1.setEditable(false);
-        t2.setEditable(false);
-        t3.setEditable(false);
+        JLabel l1 = new JLabel("₩");
+        JTextField t1 = new JTextField(25);
+        JLabel l2 = new JLabel("한국-원");
 
-        String[] country = {"미국-달러","일본-엔"};
-        JComboBox<String> cb = new JComboBox<>(country);
+        JLabel l3 = new JLabel("$");
+        JTextField t2 = new JTextField(25);
 
-        p1.add(won);p1.add(t1);
-        p2.add(t2);p2.add(t3);
-        p3.add(cb);
+        String[] c = {"미국-달러","일본-엔"};
+
+        JComboBox<String> cb = new JComboBox<>(c);
+
+        p1.add(l1);p1.add(t1);p1.add(l2);
+        p2.add(l3);p2.add(t2);p2.add(cb);
 
         panel.add(p1);
         panel.add(p2);
-        panel.add(p3);
 
         add(panel, BorderLayout.CENTER);
 
@@ -57,7 +54,7 @@ public class calculator extends JFrame {
 
     }
     void showSouth() {
-        JPanel panel = new JPanel(new GridLayout(5, 3));
+        JPanel panel = new JPanel(new GridLayout(5, 3,10,15));
         JButton b1 = new JButton("");
         JButton b2 = new JButton("");
         JButton dot = new JButton(".");

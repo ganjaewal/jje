@@ -1,9 +1,28 @@
 package chapter16;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 
 public class calculator extends JFrame {
+    JTextArea t1,t2;
+    JLabel m;
+    JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12;
+    JComboBox cb;
+
     calculator() {
         setTitle("계산기");
 
@@ -13,11 +32,14 @@ public class calculator extends JFrame {
         showSouth();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(330, 540);
+        setSize(320, 500);
         setVisible(true);
     }
     void showNorth() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,10,10));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,10,15));
+        Color color = Color.WHITE;
+        panel.setOpaque(true);
+        panel.setBackground(color);
 
         JLabel l1 = new JLabel("통화환율");
 
@@ -27,54 +49,135 @@ public class calculator extends JFrame {
 
     }
     void showCenter() {
-        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
-        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,10));
+        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,10));
         JPanel panel = new JPanel(new GridLayout(2, 0));
 
-        JLabel l1 = new JLabel("₩");
-        JTextField t1 = new JTextField(25);
+        JLabel won = new JLabel("₩");
+        t1 = new JTextArea(1,20);
+        t1.setEditable(false);
         JLabel l2 = new JLabel("한국-원");
 
-        JLabel l3 = new JLabel("$");
-        JTextField t2 = new JTextField(25);
+        m = new JLabel("단위");
+        t2 = new JTextArea(1,20);
+        t2.setEditable(false);
 
         String[] c = {"미국-달러","일본-엔"};
 
-        JComboBox<String> cb = new JComboBox<>(c);
+        cb = new JComboBox<>(c);
 
-        p1.add(l1);p1.add(t1);p1.add(l2);
-        p2.add(l3);p2.add(t2);p2.add(cb);
+        p1.add(won);p1.add(t1);p1.add(l2);
+        p2.add(m);p2.add(t2);p2.add(cb);
 
         panel.add(p1);
         panel.add(p2);
 
         add(panel, BorderLayout.CENTER);
 
+        ItemListener listener2 = e -> {
+          int index = ((JComboBox)cb).getSelectedIndex();
+            String a = t1.getText();
+            double b = Double.parseDouble(a);
+          if (index == 0){
+              m.setText("$");
+              double result1 = b*0.00072;
+              t2.setText(String.valueOf(result1));
+          }
+          else {
+              m.setText("￥");
+              double result2 = b*0.11;
+              t2.setText(String.valueOf(result2));
+          }
+        };
+        cb.addItemListener(listener2);
+
 
 
     }
     void showSouth() {
         JPanel panel = new JPanel(new GridLayout(5, 3,10,15));
-        JButton b1 = new JButton("");
-        JButton b2 = new JButton("");
-        JButton dot = new JButton(".");
-        JButton ce = new JButton("ce");
-        JButton del= new JButton("x");
-        JButton num = new JButton("0");
-        JButton num1 = new JButton("1");
-        JButton num2 = new JButton("2");
-        JButton num3 = new JButton("3");
-        JButton num4 = new JButton("4");
-        JButton num5 = new JButton("5");
-        JButton num6 = new JButton("6");
-        JButton num7 = new JButton("7");
-        JButton num8 = new JButton("8");
-        JButton num9 = new JButton("9");
+        JPanel p1 = new JPanel();
+        JPanel p2 = new JPanel();
+        JPanel p3 = new JPanel();
+        b1 = new JButton("CE");
+        b2 = new JButton("삭제");
+        b3 = new JButton("7");
+        b4 = new JButton("8");
+        b5 = new JButton("9");
+        b6 = new JButton("4");
+        b7 = new JButton("5");
+        b8 = new JButton("6");
+        b9 = new JButton("3");
+        b10 = new JButton("2");
+        b11 = new JButton("1");
+        b12 = new JButton("0");
 
-        panel.add(b1); panel.add(ce); panel.add(del); panel.add(num7); panel.add(num8); panel.add(num9);
-        panel.add(num4); panel.add(num5); panel.add(num6); panel.add(num1); panel.add(num2); panel.add(num3);
-        panel.add(b2); panel.add(num); panel.add(dot);
+        panel.add(p1);panel.add(b1);panel.add(b2);
+        panel.add(b3);panel.add(b4);panel.add(b5);
+        panel.add(p2);panel.add(b6);panel.add(b7);
+        panel.add(b8);panel.add(b9);panel.add(b10);
+        panel.add(b11);panel.add(p2);panel.add(b12);panel.add(p3);
+
+
+
         add(panel, BorderLayout.SOUTH);
+
+        ActionListener listener = e ->{
+          if(e.getSource() == b1){
+              t1.setText("");
+              t2.setText("");
+          }
+          else if(e.getSource() == b2){
+              t1.setText("");
+              t2.setText("");
+          }
+          else if(e.getSource() == b3){
+              t1.setText(t1.getText()+"7");
+          }
+          else if(e.getSource() == b4){
+              t1.setText(t1.getText()+"8");
+          }
+          else if(e.getSource() == b5){
+              t1.setText(t1.getText()+"9");
+          }
+          else if(e.getSource() == b6){
+              t1.setText(t1.getText()+"4");
+          }
+          else if(e.getSource() == b7){
+              t1.setText(t1.getText()+"5");
+          }
+          else if(e.getSource() == b8){
+              t1.setText(t1.getText()+"6");
+          }
+          else if(e.getSource() == b9){
+              t1.setText(t1.getText()+"3");
+          }
+          else if(e.getSource() == b10){
+              t1.setText(t1.getText()+"2");
+          }
+          else if(e.getSource() == b11){
+              t1.setText(t1.getText()+"1");
+          }
+          else if(e.getSource() == b12){
+              if(t1.getText().isEmpty())
+                  t1.setText("");
+              else
+                  t1.setText(t1.getText()+"0");
+          }
+        };
+        b1.addActionListener(listener);
+        b2.addActionListener(listener);
+        b3.addActionListener(listener);
+        b4.addActionListener(listener);
+        b5.addActionListener(listener);
+        b6.addActionListener(listener);
+        b7.addActionListener(listener);
+        b8.addActionListener(listener);
+        b9.addActionListener(listener);
+        b10.addActionListener(listener);
+        b11.addActionListener(listener);
+        b12.addActionListener(listener);
+
     }
     public static void main(String[] args) {
         new calculator();

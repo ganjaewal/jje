@@ -19,9 +19,9 @@ import javax.swing.JTextField;
 
 public class calculator extends JFrame {
     JTextArea t1,t2;
-    JLabel m;
+    JLabel al,bl;
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12;
-    JComboBox cb;
+    JComboBox cb1,cb2;
 
     calculator() {
         setTitle("계산기");
@@ -53,21 +53,22 @@ public class calculator extends JFrame {
         JPanel p2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,10));
         JPanel panel = new JPanel(new GridLayout(2, 0));
 
-        JLabel won = new JLabel("₩");
+        al = new JLabel("단위");
         t1 = new JTextArea(1,20);
         t1.setEditable(false);
-        JLabel l2 = new JLabel("한국-원");
 
-        m = new JLabel("단위");
+        bl = new JLabel("단위");
         t2 = new JTextArea(1,20);
         t2.setEditable(false);
 
-        String[] c = {"미국-달러","일본-엔"};
+        String[] c = {"-","한국-원","미국-달러","일본-엔"};
 
-        cb = new JComboBox<>(c);
+        cb1 = new JComboBox<>(c);
+        cb2 = new JComboBox<>(c);
 
-        p1.add(won);p1.add(t1);p1.add(l2);
-        p2.add(m);p2.add(t2);p2.add(cb);
+
+        p1.add(al);p1.add(t1);p1.add(cb1);
+        p2.add(bl);p2.add(t2);p2.add(cb2);
 
         panel.add(p1);
         panel.add(p2);
@@ -75,21 +76,71 @@ public class calculator extends JFrame {
         add(panel, BorderLayout.CENTER);
 
         ItemListener listener2 = e -> {
-          int index = ((JComboBox)cb).getSelectedIndex();
-            String a = t1.getText();
-            double b = Double.parseDouble(a);
-          if (index == 0){
-              m.setText("$");
-              double result1 = b*0.00072;
-              t2.setText(String.valueOf(result1));
+          int index2 = ((JComboBox)cb2).getSelectedIndex();
+          int index1 = ((JComboBox)cb1).getSelectedIndex();
+          String a = t1.getText();
+          double b = Double.parseDouble(a);
+          if(index1 == 1){
+              al.setText("₩");
+              if(index2 == 1){
+                  bl.setText("₩");
+                  double result = b;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 2){
+                  bl.setText("$");
+                  double result = b*0.00072;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 3){
+                  bl.setText("￥");
+                  double result = b*0.11;
+                  t2.setText(String.valueOf(result));
+
+              }
           }
-          else {
-              m.setText("￥");
-              double result2 = b*0.11;
-              t2.setText(String.valueOf(result2));
+          else if(index1 == 2){
+              al.setText("$");
+              if(index2 == 1){
+                  bl.setText("₩");
+                  double result = b*1381.21;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 2){
+                  bl.setText("$");
+                  double result = b;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 3){
+                  bl.setText("￥");
+                  double result = b*152.19;
+                  t2.setText(String.valueOf(result));
+
+              }
+          }
+          else if(index1 == 3){
+              al.setText("￥");
+              if(index2 == 1){
+                  bl.setText("₩");
+                  double result = b*9.07;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 2){
+                  bl.setText("$");
+                  double result = b*0.0066;
+                  t2.setText(String.valueOf(result));
+              }
+              if(index2 == 3){
+                  bl.setText("￥");
+                  double result = b;
+                  t2.setText(String.valueOf(result));
+
+              }
+
           }
         };
-        cb.addItemListener(listener2);
+        cb1.addItemListener(listener2);
+        cb2.addItemListener(listener2);
 
 
 

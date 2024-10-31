@@ -32,6 +32,7 @@ public class calculator extends JFrame {
         showSouth();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.WHITE);
         setSize(320, 500);
         setVisible(true);
     }
@@ -71,6 +72,8 @@ public class calculator extends JFrame {
         p2.setBackground(Color.WHITE);
         p1.setOpaque(true);
         p2.setOpaque(true);
+        panel.setBackground(Color.WHITE);
+        panel.setOpaque(true);
 
 
         p1.add(al);p1.add(t1);p1.add(cb1);

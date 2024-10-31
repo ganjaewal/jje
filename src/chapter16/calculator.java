@@ -41,7 +41,7 @@ public class calculator extends JFrame {
         panel.setOpaque(true);
         panel.setBackground(color);
 
-        JLabel l1 = new JLabel("통화환율");
+        JLabel l1 = new JLabel("통화환율(10월 31일 오전 7:08 UTC )");
 
         panel.add(l1);
 
@@ -55,6 +55,7 @@ public class calculator extends JFrame {
 
         al = new JLabel("단위");
         t1 = new JTextArea(1,20);
+        t1.setText("0");
         t1.setEditable(false);
 
         bl = new JLabel("단위");
@@ -65,6 +66,11 @@ public class calculator extends JFrame {
 
         cb1 = new JComboBox<>(c);
         cb2 = new JComboBox<>(c);
+
+        p1.setBackground(Color.WHITE);
+        p2.setBackground(Color.WHITE);
+        p1.setOpaque(true);
+        p2.setOpaque(true);
 
 
         p1.add(al);p1.add(t1);p1.add(cb1);
@@ -146,7 +152,7 @@ public class calculator extends JFrame {
 
     }
     void showSouth() {
-        JPanel panel = new JPanel(new GridLayout(5, 3,10,15));
+        JPanel panel = new JPanel(new GridLayout(5, 3,5,10));
         JPanel p1 = new JPanel();
         JPanel p2 = new JPanel();
         JPanel p3 = new JPanel();
@@ -162,6 +168,28 @@ public class calculator extends JFrame {
         b10 = new JButton("2");
         b11 = new JButton("1");
         b12 = new JButton("0");
+
+        b1.setBorderPainted(false);
+        b2.setBorderPainted(false);
+        b3.setBorderPainted(false);
+        b4.setBorderPainted(false);
+        b5.setBorderPainted(false);
+        b6.setBorderPainted(false);
+        b7.setBorderPainted(false);
+        b8.setBorderPainted(false);
+        b9.setBorderPainted(false);
+        b10.setBorderPainted(false);
+        b11.setBorderPainted(false);
+        b12.setBorderPainted(false);
+
+        panel.setBackground(Color.WHITE);
+        panel.setOpaque(true);
+        p1.setBackground(Color.WHITE);
+        p2.setBackground(Color.WHITE);
+        p3.setBackground(Color.WHITE);
+        p1.setOpaque(true);
+        p2.setOpaque(true);
+        p3.setOpaque(true);
 
         panel.add(p1);panel.add(b1);panel.add(b2);
         panel.add(b3);panel.add(b4);panel.add(b5);
